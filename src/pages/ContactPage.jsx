@@ -1,4 +1,6 @@
 // src/pages/ContactPage.jsx
+import { Phone, Mail } from 'lucide-react'
+
 const PHONE_DISPLAY = '+234 816 246 5247'
 const PHONE_WA = '2348162465247'
 const EMAIL = 'promptiq2026@gmail.com'
@@ -40,7 +42,7 @@ export default function ContactPage() {
             rel="noopener noreferrer"
             className="contact-card"
           >
-            <span className="contact-icon">📞</span>
+            <span className="contact-icon"><Phone size={17} strokeWidth={1.75} /></span>
             <span className="contact-card-body">
               <span className="contact-label">Phone / WhatsApp</span>
               <span className="contact-value">{PHONE_DISPLAY}</span>
@@ -48,7 +50,7 @@ export default function ContactPage() {
           </a>
 
           <a href={`mailto:${EMAIL}`} className="contact-card">
-            <span className="contact-icon">✉️</span>
+            <span className="contact-icon"><Mail size={17} strokeWidth={1.75} /></span>
             <span className="contact-card-body">
               <span className="contact-label">Email</span>
               <span className="contact-value">{EMAIL}</span>
