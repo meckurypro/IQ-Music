@@ -10,6 +10,7 @@ import RosterPage from './pages/RosterPage'
 import ArtistPage from './pages/ArtistPage'
 import ServicesPage from './pages/ServicesPage'
 import ContactPage from './pages/ContactPage'
+import ContactInfoPage from './pages/ContactInfoPage'
 import StaffLogin from './pages/staff/StaffLogin'
 import StaffDashboard from './pages/staff/StaffDashboard'
 
