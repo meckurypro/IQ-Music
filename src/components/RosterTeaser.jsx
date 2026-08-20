@@ -1,5 +1,6 @@
 // src/components/RosterTeaser.jsx
 import { useEffect, useState } from 'react'
+import { ArrowRight } from 'lucide-react'
 import Reveal from './Reveal'
 import ArtistCard from './ArtistCard'
 import { supabase } from '../lib/supabase'
@@ -40,7 +41,9 @@ export default function RosterTeaser() {
           ))}
         </div>
         <Reveal delay={150}>
-          <a href="/roster" className="text-link">See the full roster →</a>
+          <a href="/roster" className="text-link">
+            See the full roster <ArrowRight size={14} className="link-arrow" />
+          </a>
         </Reveal>
       </div>
     </section>
