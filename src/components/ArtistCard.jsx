@@ -1,5 +1,6 @@
 // src/components/ArtistCard.jsx
 import { Link } from 'react-router-dom'
+import { ArrowUpRight } from 'lucide-react'
 
 export default function ArtistCard({ artist }) {
   return (
@@ -10,6 +11,9 @@ export default function ArtistCard({ artist }) {
         ) : (
           <div className="artist-card-photo-placeholder" />
         )}
+        <span className="artist-card-hint">
+          <ArrowUpRight size={16} strokeWidth={2} />
+        </span>
       </div>
       <div className="artist-card-info">
         <strong>{artist.stage_name}</strong>
