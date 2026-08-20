@@ -34,7 +34,7 @@ export default function ContactPage() {
         </h2>
 
         <div style={{ display: 'grid', gap: 0, marginBottom: 40 }}>
-          
+          <a
             href={`https://wa.me/${PHONE_WA}`}
             target="_blank"
             rel="noopener noreferrer"
