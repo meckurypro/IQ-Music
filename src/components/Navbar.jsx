@@ -6,6 +6,7 @@ import Logo from './Logo'
 const LINKS = [
   { to: '/roster', label: 'Roster' },
   { to: '/services', label: 'Services' },
+  { to: '/contact', label: 'Contact' },
 ]
 
 export default function Navbar() {
@@ -17,15 +18,13 @@ export default function Navbar() {
         <Link to="/" className="nav-logo" onClick={() => setOpen(false)}>
           <Logo />
         </Link>
-
         <nav className="nav-links">
           {LINKS.map((l) => (
             <NavLink key={l.to} to={l.to}>{l.label}</NavLink>
           ))}
         </nav>
-
         <div className="nav-right">
-          <Link to="/contact" className="nav-cta">Work with us</Link>
+          <Link to="/work-with-us" className="nav-cta">Work with us</Link>
           <button
             className={`hamburger${open ? ' is-open' : ''}`}
             aria-label={open ? 'Close menu' : 'Open menu'}
@@ -36,12 +35,12 @@ export default function Navbar() {
           </button>
         </div>
       </div>
-
       <div className={`mobile-drawer${open ? ' is-open' : ''}`}>
         <nav className="mobile-links" onClick={() => setOpen(false)}>
           {LINKS.map((l) => (
             <NavLink key={l.to} to={l.to}>{l.label}</NavLink>
           ))}
+          <NavLink to="/work-with-us" onClick={() => setOpen(false)}>Work with us</NavLink>
         </nav>
       </div>
     </div>
