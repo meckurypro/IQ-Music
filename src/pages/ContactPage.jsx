@@ -1,108 +1,77 @@
 // src/pages/ContactPage.jsx
-import { useState } from 'react'
-import { supabase } from '../lib/supabase'
+const PHONE_DISPLAY = '+234 816 246 5247'
+const PHONE_WA = '2348162465247'
+const EMAIL = 'promptiq2026@gmail.com'
 
-const ROLES = ['Songwriter', 'Producer', 'Dancer', 'Director', 'Cinematographer', 'Manager', 'Other']
-
-const initialForm = {
-  name: '', email: '', phone: '',
-  purpose: 'collaborate', // 'collaborate' | 'hire'
-  role: ROLES[0],
-  message: '',
-}
+const SIBLINGS = [
+  {
+    name: 'IQ Academy',
+    tag: 'Learn AI skills',
+    href: 'https://academy.promptiq.com.ng',
+    logo: '/iq-academy-logo.png',
+  },
+  {
+    name: 'IQ Ads',
+    tag: 'Cinematic commercials',
+    href: 'https://ads.promptiq.com.ng',
+    logo: '/iq-ads-logo.png',
+  },
+  {
+    name: 'Meckury AI',
+    tag: 'Content creation & filmmaking',
+    href: 'https://meckury.ai',
+    logo: null,
+  },
+]
 
 export default function ContactPage() {
-  const [form, setForm] = useState(initialForm)
-  const [status, setStatus] = useState({ state: 'idle', message: '' })
-
-  const handleChange = (e) => {
-    const { name, value } = e.target
-    setForm((prev) => ({ ...prev, [name]: value }))
-  }
-
-  const handleSubmit = async (e) => {
-    e.preventDefault()
-    setStatus({ state: 'submitting', message: '' })
-
-    const isCollab = form.purpose === 'collaborate'
-    const composedMessage = isCollab
-      ? `[Collaboration — ${form.role}]\n${form.message}`
-      : `[Service request]\n${form.message}`
-
-    const { error } = await supabase.from('promptiq_inquiries').insert([{
-      name: form.name,
-      email: form.email,
-      phone: form.phone || null,
-      inquiry_type: isCollab ? 'general' : 'custom_job',
-      service_interest: 'music',
-      message: composedMessage,
-      status: 'new',
-      source: 'iqmusic',
-    }])
-
-    if (error) {
-      setStatus({ state: 'error', message: "Something didn't send. Please try again or email us directly." })
-      return
-    }
-
-    setStatus({ state: 'success', message: "Got it — we'll be in touch shortly." })
-    setForm(initialForm)
-  }
-
   return (
     <section style={{ paddingTop: 40 }}>
-      <div className="container" style={{ maxWidth: 560 }}>
+      <div className="container" style={{ maxWidth: 640 }}>
         <span className="eyebrow">Get in touch</span>
-        <h2 style={{ fontFamily: 'var(--font-display)', fontSize: 30, margin: '14px 0 24px' }}>
-          Work with IQ Music.
+        <h2 style={{ fontFamily: 'var(--font-display)', fontSize: 30, margin: '14px 0 28px' }}>
+          Talk to IQ Music.
         </h2>
 
-        <form onSubmit={handleSubmit} style={{ display: 'grid', gap: 16 }}>
-          <div>
-            <label className="form-label">I'm reaching out to</label>
-            <select name="purpose" value={form.purpose} onChange={handleChange} className="form-input">
-              <option value="collaborate">Join as a collaborator</option>
-              <option value="hire">Hire a service (production, video, management)</option>
-            </select>
-          </div>
+        <div style={{ display: 'grid', gap: 0, marginBottom: 40 }}>
+          <a
+            href={`https://wa.me/${PHONE_WA}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="contact-card"
+          >
+            <span className="contact-icon">📞</span>
+            <span className="contact-card-body">
+              <span className="contact-label">Phone / WhatsApp</span>
+              <span className="contact-value">{PHONE_DISPLAY}</span>
+            </span>
+          </a>
 
-          {form.purpose === 'collaborate' && (
-            <div>
-              <label className="form-label">Role</label>
-              <select name="role" value={form.role} onChange={handleChange} className="form-input">
-                {ROLES.map((r) => <option key={r} value={r}>{r}</option>)}
-              </select>
-            </div>
-          )}
+          <a href={`mailto:${EMAIL}`} className="contact-card">
+            <span className="contact-icon">✉️</span>
+            <span className="contact-card-body">
+              <span className="contact-label">Email</span>
+              <span className="contact-value">{EMAIL}</span>
+            </span>
+          </a>
+        </div>
 
-          <div className="form-row">
-            <div>
-              <label className="form-label">Name</label>
-              <input className="form-input" name="name" required value={form.name} onChange={handleChange} />
-            </div>
-            <div>
-              <label className="form-label">Email</label>
-              <input className="form-input" name="email" type="email" required value={form.email} onChange={handleChange} />
-            </div>
-          </div>
-
-          <div>
-            <label className="form-label">Phone / WhatsApp</label>
-            <input className="form-input" name="phone" type="tel" inputMode="numeric" value={form.phone} onChange={handleChange} />
-          </div>
-
-          <div>
-            <label className="form-label">Message</label>
-            <textarea className="form-input" name="message" required style={{ minHeight: 110 }} value={form.message} onChange={handleChange} />
-          </div>
-
-          <button className="btn-primary" type="submit" disabled={status.state === 'submitting'} style={{ width: 'fit-content' }}>
-            {status.state === 'submitting' ? 'Sending…' : 'Send'}
-          </button>
-
-          {status.state === 'success' && <p style={{ color: 'var(--accent)', fontSize: 13 }}>{status.message}</p>}
-          {status.state === 'error' && <p style={{ color: '#e0776a', fontSize: 13 }}>{status.message}</p>}
-        </form>
+        <span className="mini-heading" style={{ display: 'block', marginBottom: 14 }}>
+          More from PromptIQ
+        </span>
+        <div className="sibling-grid">
+          {SIBLINGS.map((s) => (
+            <a key={s.name} href={s.href} target="_blank" rel="noopener noreferrer" className="sibling-card">
+              {s.logo
+                ? <img src={s.logo} alt={s.name} />
+                : <span className="sibling-card-word">Meckury<span>.ai</span></span>}
+              <div>
+                <strong>{s.name}</strong>
+                <p>{s.tag}</p>
+              </div>
+            </a>
+          ))}
+        </div>
       </div>
     </section>
   )
