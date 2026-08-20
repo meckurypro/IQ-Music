@@ -20,7 +20,7 @@ const SIBLINGS = [
     name: 'Meckury AI',
     tag: 'Content creation & filmmaking',
     href: 'https://meckury.ai',
-    logo: null,
+    logo: '/meckury-ai-logo.png',
   },
 ]
 
@@ -34,7 +34,7 @@ export default function ContactPage() {
         </h2>
 
         <div style={{ display: 'grid', gap: 0, marginBottom: 40 }}>
-          <a
+          
             href={`https://wa.me/${PHONE_WA}`}
             target="_blank"
             rel="noopener noreferrer"
@@ -62,9 +62,7 @@ export default function ContactPage() {
         <div className="sibling-grid">
           {SIBLINGS.map((s) => (
             <a key={s.name} href={s.href} target="_blank" rel="noopener noreferrer" className="sibling-card">
-              {s.logo
-                ? <img src={s.logo} alt={s.name} />
-                : <span className="sibling-card-word">Meckury<span>.ai</span></span>}
+              <img src={s.logo} alt={s.name} />
               <div>
                 <strong>{s.name}</strong>
                 <p>{s.tag}</p>
