@@ -1,6 +1,9 @@
 // src/pages/ServicesPage.jsx
+import { AudioWaveform, Clapperboard, Sparkles, ArrowRight } from 'lucide-react'
 import Reveal from '../components/Reveal'
 import { services } from '../components/servicesData'
+
+const ICONS = { AudioWaveform, Clapperboard, Sparkles }
 
 export default function ServicesPage() {
   return (
@@ -12,14 +15,22 @@ export default function ServicesPage() {
           <p>Beyond our own artists, IQ Music produces for clients directly.</p>
         </Reveal>
         <div className="services-grid">
-          {services.map((s, i) => (
-            <Reveal as="div" className="service-card" key={s.tag} delay={i * 80}>
-              <span className="service-tag">{s.tag}</span>
-              <h3>{s.name}</h3>
-              <p>{s.desc}</p>
-              <a href="/contact" className="text-link" style={{ marginTop: 'auto' }}>Get in touch →</a>
-            </Reveal>
-          ))}
+          {services.map((s, i) => {
+            const Icon = ICONS[s.icon]
+            return (
+              <Reveal as="div" className="service-card" key={s.tag} delay={i * 90}>
+                <div className="service-card-top">
+                  <span className="service-icon">{Icon && <Icon size={18} strokeWidth={1.75} />}</span>
+                  <span className="service-tag">{s.tag}</span>
+                </div>
+                <h3>{s.name}</h3>
+                <p>{s.desc}</p>
+                <a href="/contact" className="text-link" style={{ marginTop: 'auto' }}>
+                  Get in touch <ArrowRight size={14} className="link-arrow" />
+                </a>
+              </Reveal>
+            )
+          })}
         </div>
       </div>
     </section>
