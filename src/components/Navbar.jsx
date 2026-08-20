@@ -6,7 +6,6 @@ import Logo from './Logo'
 const LINKS = [
   { to: '/roster', label: 'Roster' },
   { to: '/services', label: 'Services' },
-  { to: '/contact', label: 'Contact' },
 ]
 
 export default function Navbar() {
