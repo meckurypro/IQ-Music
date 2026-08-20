@@ -143,7 +143,80 @@ section { padding: 68px 0; }
 @media (max-width: 480px) { .form-row { grid-template-columns: 1fr; } }
 
 /* ---------- Footer ---------- */
-footer { border-top: 1px solid var(--line); padding: 32px 0; }
+footer { border-top: 1px solid var(--line); padding: 0 0 32px; overflow: hidden; }
 .footer-link { color: var(--text-dim); font-size: 13px; font-weight: 600; }
 .footer-link:hover { color: var(--accent); }
 .footer-brand-link { color: var(--accent); }
+
+/* Backdrop logo strip — sibling brands rendered large, faint, and slightly
+   overlapping like a premium watermark wall behind the footer content. */
+.footer-backdrop {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(28px, 6vw, 64px);
+  padding: 40px 24px 28px;
+  flex-wrap: wrap;
+}
+.footer-backdrop-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.32;
+  filter: grayscale(1);
+  transition: opacity 0.3s ease, filter 0.3s ease, transform 0.3s ease;
+}
+.footer-backdrop-item:hover {
+  opacity: 0.95;
+  filter: grayscale(0);
+  transform: translateY(-2px);
+}
+.footer-backdrop-item img {
+  height: clamp(40px, 6vw, 64px);
+  width: auto;
+  border-radius: 12px;
+}
+.footer-backdrop-word {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(22px, 4vw, 34px);
+  color: var(--text);
+  letter-spacing: -0.01em;
+}
+.footer-backdrop-word span { color: var(--accent); }
+
+/* ---------- Contact (static) ---------- */
+.contact-card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 22px 24px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.contact-card + .contact-card { margin-top: 12px; }
+.contact-icon {
+  width: 40px; height: 40px; border-radius: 10px;
+  background: var(--surface-2); border: 1px solid var(--line);
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0; font-size: 17px;
+}
+.contact-card-body span { display: block; }
+.contact-label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); margin-bottom: 3px; }
+.contact-value { font-family: var(--font-display); font-size: 16px; font-weight: 600; color: var(--text); }
+.contact-value:hover { color: var(--accent); }
+
+.sibling-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 8px; }
+@media (max-width: 640px) { .sibling-grid { grid-template-columns: 1fr; } }
+.sibling-card {
+  background: var(--surface); border: 1px solid var(--line); border-radius: 10px;
+  padding: 16px; display: flex; flex-direction: column; gap: 10px;
+  transition: border-color 0.2s, transform 0.2s;
+}
+.sibling-card:hover { border-color: var(--line-strong); transform: translateY(-2px); }
+.sibling-card img { height: 34px; width: 34px; border-radius: 8px; object-fit: cover; }
+.sibling-card-word { font-family: var(--font-display); font-weight: 700; font-size: 18px; }
+.sibling-card-word span { color: var(--accent); }
+.sibling-card strong { font-family: var(--font-display); font-size: 14px; }
+.sibling-card p { color: var(--text-dim); font-size: 12.5px; line-height: 1.5; margin: 0; }
